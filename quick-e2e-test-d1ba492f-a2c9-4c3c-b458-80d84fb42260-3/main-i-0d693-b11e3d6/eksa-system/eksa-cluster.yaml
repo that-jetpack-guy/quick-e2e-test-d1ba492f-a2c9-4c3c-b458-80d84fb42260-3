@@ -1,0 +1,67 @@
+apiVersion: anywhere.eks.amazonaws.com/v1alpha1
+kind: Cluster
+metadata:
+  annotations:
+    anywhere.eks.amazonaws.com/managed-by-cli: "true"
+    anywhere.eks.amazonaws.com/management-components-version: v0.23.0-dev+build.4
+  name: main-i-0d693-b11e3d6
+  namespace: default
+spec:
+  clusterNetwork:
+    cniConfig:
+      cilium: {}
+    pods:
+      cidrBlocks:
+      - 192.168.0.0/16
+    services:
+      cidrBlocks:
+      - 10.96.0.0/12
+  controlPlaneConfiguration:
+    count: 1
+    machineHealthCheck:
+      maxUnhealthy: 100%
+  datacenterRef:
+    kind: DockerDatacenterConfig
+    name: main-i-0d693-b11e3d6
+  eksaVersion: v0.23.0-dev+build.4
+  externalEtcdConfiguration:
+    count: 1
+  gitOpsRef:
+    kind: FluxConfig
+    name: eksa-test
+  kubernetesVersion: "1.32"
+  licenseToken: eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlSWQiOiJsLWJkMmYxZDNkNDhmOTRiYzU4M2QyZDkwNDAxN2NkM2M5IiwibGljZW5zZVZlcnNpb24iOiIxIiwiYmVnaW5WYWxpZGl0eSI6IjIwMjQtMDMtMjBUMjA6NDc6MTMuMDAwWiIsImVuZFZhbGlkaXR5IjoiMjAyNS0wMy0yMVQyMDo0NzoxMy4wMDBaIiwic3Vic2NyaXB0aW9uSWQiOiI5ZjhhMDdhYS1hNTZiLTQ4OWQtYWQwNS1jMmIzMGM1MzljMDU6ZGNiYjE5NTQiLCJzdWJzY3JpcHRpb25OYW1lIjoiSW50ZWdyYXRpb24tVGVzdC05MWYzY2UzYi1jMGVlLTQzOGMtODEwMS1lODdhNDg5MTIwNDAiLCJhY2NvdW50SWQiOiI0MTI2ODc5NDgzOTgiLCJyZWdpb24iOiJ1cy13ZXN0LTIifQ.AiheXFAjEe5NdumVOcGKsJhRthpny_Lnjpotqvghb2Qq8QS-_iZRnVG146uVyQlzX99sLvDtVE5V48x9xAxMGA
+  machineHealthCheck:
+    maxUnhealthy: 100%
+    nodeStartupTimeout: 10m0s
+    unhealthyMachineTimeout: 5m0s
+  managementCluster:
+    name: main-i-0d693-b11e3d6
+  workerNodeGroupConfigurations:
+  - count: 1
+    machineHealthCheck:
+      maxUnhealthy: 40%
+    name: md-0
+
+---
+apiVersion: anywhere.eks.amazonaws.com/v1alpha1
+kind: DockerDatacenterConfig
+metadata:
+  name: main-i-0d693-b11e3d6
+  namespace: default
+spec: {}
+
+---
+apiVersion: anywhere.eks.amazonaws.com/v1alpha1
+kind: FluxConfig
+metadata:
+  name: eksa-test
+  namespace: default
+spec:
+  branch: quick-e2e-test-d1ba492f-a2c9-4c3c-b458-80d84fb42260-3
+  clusterConfigPath: quick-e2e-test-d1ba492f-a2c9-4c3c-b458-80d84fb42260-3
+  git:
+    repositoryUrl: ssh://git@github.com/that-jetpack-guy/quick-e2e-test-d1ba492f-a2c9-4c3c-b458-80d84fb42260-3.git
+  systemNamespace: default
+
+---
